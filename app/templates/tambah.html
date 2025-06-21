@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tambah Buku</title>
+    <style>
+        /* Background gradient gelap dan elegan */
+        body {
+              margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b263b 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #eee;
+        }
+
+        /* Container form dengan shadow dan transparansi */
+        form {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            width: 100%;
+            max-width: 400px;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+            color: #222;
+        }
+
+        /* Animasi muncul */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            text-align: center;
+            color: #0077cc;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #005a99;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px 12px;
+            margin-bottom: 20px;
+            border: 2px solid #00bfff;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #0077cc;
+            outline: none;
+            box-shadow: 0 0 8px 2px #00aaffaa;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #0077cc, #00bfff);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 5px 15px #00bfff99;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: linear-gradient(45deg, #005f99, #0099ee);
+            box-shadow: 0 8px 20px #0077cccc;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" onsubmit="return validasiForm();">
+        <h2>Tambah Buku Baru</h2>
+        <label for="judul">Judul:</label>
+        <input type="text" id="judul" name="judul" />
+        
+        <label for="penulis">Penulis:</label>
+        <input type="text" id="penulis" name="penulis" />
+
+        <label for="penerbit">penerbit</label>
+        <input type="text" id="penerbit" name="penerbit" />
+        
+        <label for="tahun">Tahun:</label>
+        <input type="number" id="tahun" name="tahun" />
+        
+        <input type="submit" value="Tambah" />
+    </form>
+
+    <script>
+        // Fungsi validasi form sebelum submit
+        function validasiForm() {
+            const judul = document.getElementById('judul').value.trim();
+            const penulis = document.getElementById('penulis').value.trim();
+            const tahun = document.getElementById('tahun').value.trim();
+            const penerbit = document.getElementById('penerbit').value.trim();
+
+            if (!judul || !penulis || !tahun) {
+                alert("Semua kolom harus diisi!");
+                return false;
+            }
+            // Validasi tahun 4 digit angka
+            if (!/^\d{4}$/.test(tahun)) {
+                alert("Tahun harus berupa angka 4 digit.");
+                return false;
+            }
+            return true;
+        }
+
+        // Trigger animasi fade-in pada form saat halaman dimuat
+        window.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('form').style.opacity = 1;
+            document.querySelector('form').style.transform = 'translateY(0)';
+        });
+    </script>
+</body>
+</html>
